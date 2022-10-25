@@ -1,9 +1,11 @@
 {% extends 'main.html'%}
 
 {% block content%}
+<br><br><br>
 
+{% include 'status.html'%}<br><br>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
         <h5>Customers:</h5><hr>
         <div class="card card-body">
             <a  class="btn btn-primary btn-sm btn-block" style="text-decoration:none"> Create Customer</a>
@@ -17,7 +19,7 @@
         </div>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
         <h5 >Last 5 Orders:</h5><hr>
         <div class="card card-body">
             <a  class="btn btn-primary btn-sm btn-block" style="text-decoration:none"> Create Order</a>
