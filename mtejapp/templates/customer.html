@@ -7,8 +7,8 @@
         <div class="card card-body">
             <h5 class="card-title text-center">Customer:{{customer.name}}</h5>
             <hr>
-            <a class="btn btn-sm btn-outline-info">Update Customer</a><br>
-            <a class="btn btn-sm btn-outline-warning">Delete Customer</a>
+            <a class="btn btn-sm btn-outline-info" href="{%url 'updateC' customer.id%}">Update Customer</a><br>
+            <a class="btn btn-sm btn-outline-warning" href="{%url 'deleteC' customer.id%}">Delete Customer</a>
 
         </div>
 

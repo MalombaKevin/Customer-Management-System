@@ -33,6 +33,7 @@ def customer(request, pk):
     orders = customer.order_set.all()
     totalOrders = orders.count()
 
+
     context= {'customer':customer, 'orders':orders, 'totalOrders': totalOrders}
 
     return render (request, "customer.html", context )
@@ -74,6 +75,49 @@ def deleteOrder(request, pk):
         return redirect('/')
 
     return render(request, 'deleteOrder.html')
+
+
+def createUser(request):
+
+    form = CustomerForm()
+    if request.method=="POST":
+        form=CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+    
+    context = {'form':form}
+
+
+    return render(request, 'customer/create.html', context)
+
+def updateUser(request, pk):
+    customers = Customer.objects.get(id=pk)
+
+    form = CustomerForm(instance=customers)
+
+    if request.method=="POST":
+        form=CustomerForm(request.POST, instance=customers)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+    
+    context = {'form':form}
+
+    return render (request, 'customer/update.html', context)
+
+
+def deleteUser(request, pk):
+
+    customer = Customer.objects.get(id=pk)
+    form = CustomerForm()
+    
+    if request.method=="POST":
+        customer.delete()
+        return redirect('/')
+    context= {'form':form}
+    
+    return render(request, 'customer/delete.html', context)
 
 
    
