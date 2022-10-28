@@ -1,0 +1,18 @@
+{% extends 'main.html'%}
+
+
+{% block content%}
+<br><br><br>
+
+
+<form method="POST" action="">
+    {% csrf_token%}
+  
+    <p>Do you want to delete Order</p>
+
+
+
+   <button type="submit">Delete</button>
+</form>
+
+{%endblock%}

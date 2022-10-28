@@ -10,12 +10,23 @@
         <h5>Customers:</h5><hr>
         <div class="card card-body">
             <a  class="btn btn-primary btn-sm btn-block" style="text-decoration:none"> Create Customer</a>
-            <table class="p-4">
+            <table class="p-4 table">
                 <tr>
+                   
                     <th>Customers</th>
-                    <th>Orders</th>
+                    <th>Phone No:</th>
+
                     
                 </tr>
+
+                {%for customer in customers%}
+                <tr>
+                    <td><a class="btn btn-sm btn-outline-info"href="{%url 'customer' customer.id%}">{{customer.name}}</a></td>
+                   
+                    <td><a href="tel:{{customer.phone}}">{{customer.phone}}</a></td>
+                   
+                </tr>
+                {%endfor%}
             </table>
         </div>
 
@@ -23,9 +34,10 @@
     <div class="col-md-7">
         <h5 >Last 5 Orders:</h5><hr>
         <div class="card card-body">
-            <a  class="btn btn-primary btn-sm btn-block" style="text-decoration:none"> Create Order</a>
+            <a href="{% url 'create_order'%}" class="btn btn-primary btn-sm btn-block" style="text-decoration:none"> Create Order</a>
             <table>
                 <tr>
+                    <th>Customer</th>
                     <th>Product</th>
                     <th>Date Ordered</th>
                     <th>Status</th>
@@ -33,6 +45,17 @@
                     <th>Remove</th>
                     
                 </tr>
+                {% for order in orders%}
+                <tr>
+                    <td>{{order.customer.name}}</td>
+                    <td>{{order.product.name}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a href="{%url 'update' order.id%}" class="btn btn-sm btn-outline-primary">Update</a></td>
+                    <td><a href="{%url 'delete' order.id%}" class="btn btn-sm btn-outline-warning">Delete</a></td>
+                </tr>
+
+                {%endfor%}
             </table>
         </div>
     </div>
