@@ -6,10 +6,13 @@
     <div class="col-md-4">
         <div class="card card-body">
             <h5 class="card-title text-center">Customer:{{customer.name}}</h5>
+
             <hr>
+            <a class="btn btn-sm btn-outline-primary" href="{%url 'create_order' customer.id%}">Place Order</a><br>
+
             <a class="btn btn-sm btn-outline-info" href="{%url 'updateC' customer.id%}">Update Customer</a><br>
             <a class="btn btn-sm btn-outline-warning" href="{%url 'deleteC' customer.id%}">Delete Customer</a>
-
+            
         </div>
 
     </div>
@@ -36,8 +39,12 @@
 </div><br><br>
 
 <div class="card card-body">
-    <div class="col-md-2">
-        <a class="btn btn-sm btn-primary">Search</a>
+    <div>
+        <form method="get">
+             {{myFilter.form}}
+            <button type="submit" class="btn btn-sm btn-primary">Search</button>
+        </form>
+       
     </div>
 
 
@@ -60,8 +67,9 @@
             <td>{{order.product.category}}</td>
             <td>{{order.date_created}}</td>
             <td>{{order.status}}</td>
-            <td><a href="" class="btn btn-sm btn-outline-primary">Update</a></td>
-            <td><a href="" class="btn btn-sm btn-outline-danger">Delete</a></td>
+            <td><a href="{%url 'update' order.id%}" class="btn btn-sm btn-outline-primary">Update</a></td>
+            <td><a href="{%url 'delete' order.id%}" class="btn btn-sm btn-outline-warning">Delete</a></td>
+            
           
         </tr>
         {%endfor%}

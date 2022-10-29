@@ -1,0 +1,73 @@
+Metadata-Version: 2.1
+Name: django-recyclebin
+Version: 0.2
+Summary: A Django app to make recyclebin.
+Home-page: https://github.com/abraffay/django-recyclebin
+Author: Abdul Raffay
+Author-email: abdulraffahmehtab@gmail.com
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/abraffay/django-recyclebin/issues
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Django (>=2.2)
+Requires-Dist: djangorestframework (>=3.2)
+
+=====
+Django Recyclebin
+=====
+
+Django Recyclebin is a Django app to create recyclebin functionality in your project. you will be able to temporarily delete, restore and permanently delete data.
+
+
+Quick start
+-----------
+
+1. Add "recyclebin" to your INSTALLED_APPS setting like this::
+
+    INSTALLED_APPS = [
+        ...
+        'recyclebin',
+    ]
+
+2. import SoftDeleteMixin ''from recyclebin.models import SoftDeleteMixin''
+
+3. Inherit your model with SoftDeleteMixin
+
+        ``class Mymodel(SoftDeleteMixin)``
+
+4. Run ``python manage.py makemigrations``  and ``python manage.py migrate``.
+
+5. import recyclebin functions ``from recyclebin.functions import get_deleted_items, restore, permanent_delete``
+
+6. How to temporarily delete.
+    you don't need to do anything. after inheriting your model with SoftDeleteMixin. your regular .delete() method will temporarily delete objects
+
+7. How to view deleted items 
+    create a list of models
+    from myapp.models import Model1, Model2, Model3...
+    li = [Model1, Model2, Model3...]
+     ``get_deleted_items(li)``
+
+    ''This function will return serialized response that will contain model_name, name, pk, deleted_by, deleted_at''
+    
+    YOUR MODEL MUST HAVE NAME FIELD OTHERWISE NONE WILL BE RETURNED INSTEAD OF NAME
+
+8. How to restore
+    pass restore function model name and id. model name must be string and id an integer
+    ``restore(model1, 1)``
+
+9. How to permanently delete
+    pass permanent_delete function model name and id. model name must be string and id an integer
+    ``permanent_delete(model1, 1)``
+

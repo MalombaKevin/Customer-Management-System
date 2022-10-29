@@ -8,11 +8,11 @@
 <form method="POST" action="">
     {% csrf_token%}
   
-    <p>Do you want to delete Order</p>
+    <p>Do you want to delete order number {{order.id}} : <span style="color:steelblue">{{order}}</span></p>
 
 
 
-   <button type="submit">Delete</button>
+ <a class='btn btn-sm btn-outline-primary' href="/">Cancel</a>  <button class="btn btn-sm btn-warning" type="submit">Delete</button> 
 </form>
 
 {%endblock%}

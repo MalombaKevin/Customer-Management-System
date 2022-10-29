@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from django.forms import inlineformset_factory
+from .filters import OrderFilter
 
 # Create your views here.
 
@@ -12,8 +14,9 @@ def home(request):
     orders_total = orders.count()
     delivered = orders.filter(status='Delivered').count()
     pending = orders.filter( status='Pending').count()
+    title= "MtejaBase"
 
-    context = {'orders':orders, 'customers': customers, 'ordersTotal':orders_total,'delivered':delivered, 'pending':pending}
+    context = {'orders':orders, 'customers': customers, 'ordersTotal':orders_total,'delivered':delivered, 'pending':pending, 'title':title}
 
 
 
@@ -33,22 +36,31 @@ def customer(request, pk):
     orders = customer.order_set.all()
     totalOrders = orders.count()
 
+    myFilter = OrderFilter(request.GET, queryset=orders)
 
-    context= {'customer':customer, 'orders':orders, 'totalOrders': totalOrders}
+    orders= myFilter.qs
+
+    context= {'customer':customer, 'orders':orders, 'totalOrders': totalOrders, 'myFilter': myFilter}
 
     return render (request, "customer.html", context )
 
 
-def createOrder(request):
-    form = OrderForm()
+def createOrder(request, pk):
+    
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'))
+    customer=Customer.objects.get(id=pk)
+    formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
+    
+    # form = OrderForm(initial={'customer': customer})
     if request.method=="POST":
         # print("Printing:", request.POST)
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
+        # form = OrderForm(request.POST)
+        formset = OrderFormSet(request.POST,instance=customer)
+        if formset.is_valid():
+            formset.save()
         return redirect("/")
 
-    context={'form':form}
+    context={'formset':formset}
 
     return render(request, 'order_form.html', context)
 
@@ -73,8 +85,10 @@ def deleteOrder(request, pk):
     if request.method=="POST":
         order.delete()
         return redirect('/')
+    
+    context = {'order':order}
 
-    return render(request, 'deleteOrder.html')
+    return render(request, 'deleteOrder.html', context)
 
 
 def createUser(request):

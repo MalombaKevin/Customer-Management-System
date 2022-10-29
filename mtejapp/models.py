@@ -1,4 +1,10 @@
+from ast import Or
+from itertools import product
 from django.db import models
+from recyclebin.models import SoftDeleteMixin
+from recyclebin.functions import get_deleted_items, restore, permanent_delete
+
+
 
 # Create your models here.
 
@@ -48,9 +54,18 @@ class Order(models.Model):
     )
     customer=models.ForeignKey(Customer, null=True, on_delete= models.SET_NULL)
     product=models.ForeignKey(Product, null=True, on_delete= models.SET_NULL)
-    date_created=models.DateTimeField(auto_now_add = True)
+    date_created=models.DateTimeField(auto_now= True)
     status = models.CharField(max_length = 200, null=True, choices = STATUS)
+    note=models.CharField(max_length=200, null=True)
 
-   
+    def __str__(self):
+        return self.product.name
+
+class Mymodel(SoftDeleteMixin):
+    
+
+    def __str__(self):
+        return self
+
 
 
