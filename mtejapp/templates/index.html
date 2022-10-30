@@ -1,10 +1,17 @@
+
 {% extends 'main.html'%}
+{% load static%}
 
 
 
 {% block content%}
+
+{% block script%}
+<script src="{%static 'js/scripts.js'%}"></script>
+{%endblock%}
 <br><br><br>
 <p align="center">{{user.username}}</p>
+<p id="tarehe"></p>
 {% include 'status.html'%}<br><br>
 <div class="row">
   
