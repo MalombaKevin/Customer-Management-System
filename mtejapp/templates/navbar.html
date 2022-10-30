@@ -17,4 +17,9 @@
         </div>
       </div>
     </div>
+    <div class="collapse navbar-collapse p-1" id="navbarNavAltMarkup">
+     
+    <span style="color:gold">Hello, {{request.user}}</span>
+    <span><a href="{%url 'logoutPage'%}">LogOut</a></span>
+    </div>
   </nav>

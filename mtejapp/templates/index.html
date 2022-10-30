@@ -4,10 +4,12 @@
 
 {% block content%}
 <br><br><br>
-
+<p align="center">{{user.username}}</p>
 {% include 'status.html'%}<br><br>
 <div class="row">
+  
     <div class="col-md-5">
+       
         <h5>Customers:</h5><hr>
         <div class="card card-body">
             <a href="{%url 'createCustomer'%}"  class="btn btn-primary btn-sm btn-block" style="text-decoration:none"> Create Customer</a>
