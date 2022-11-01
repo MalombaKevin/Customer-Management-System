@@ -14,4 +14,13 @@ function tarehe(){
     document.getElementById('saa').innerHTML = hourToday + " : " + minutesToday + " : " + secondsToday
 }
 
+
+function darkmode(){
+    var page =document.body 
+ 
+     page.classList.toggle('darkmode')
+ 
+    
+ }
+
   
