@@ -2,3 +2,8 @@ body{
     background-color:rgb(230, 205, 205);
   
 }
+
+.darkmode{
+    color:white;
+    background-color: black;
+}
