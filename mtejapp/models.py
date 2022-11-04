@@ -3,12 +3,14 @@ from itertools import product
 from django.db import models
 from recyclebin.models import SoftDeleteMixin
 from recyclebin.functions import get_deleted_items, restore, permanent_delete
+from django.contrib.auth.models import User
 
 
 
 # Create your models here.
 
 class Customer(models.Model):
+    user = models.OneToOneField(User,null=True, on_delete = models.CASCADE)
     name= models.CharField(max_length = 200, null=True)
     phone= models.CharField(max_length = 200, null=True)
     email=models.CharField(max_length = 200, null=True)

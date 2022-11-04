@@ -13,7 +13,8 @@ urlpatterns =[
     path('deleteCustomer/<str:pk>/', views.deleteUser, name='deleteC'),
     path('loginPage/', views.loginPage, name='loginPage'),
      path('logoutPage/', views.logoutPage, name='logoutPage'),
-    path('registerPage/', views.registerPage, name="registerPage")
+    path('registerPage/', views.registerPage, name="registerPage"),
+    path('user', views.UserPage, name='user')
 
 
     ]
