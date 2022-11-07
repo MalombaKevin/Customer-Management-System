@@ -220,4 +220,13 @@ def deleteUser(request, pk):
     return render(request, 'customer/delete.html', context)
 
 
+@login_required(login_url='loginPage')
+@allowed_users(allowed_roles=["customer"])
+def settingsP(request):
+
+    context = {}
+
+    return render (request, 'settings.html', context )
+
+
    

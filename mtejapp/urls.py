@@ -14,7 +14,8 @@ urlpatterns =[
     path('loginPage/', views.loginPage, name='loginPage'),
      path('logoutPage/', views.logoutPage, name='logoutPage'),
     path('registerPage/', views.registerPage, name="registerPage"),
-    path('user', views.UserPage, name='user')
+    path('user', views.UserPage, name='user'),
+    path ('settings', views.settingsP, name="settings")
 
 
     ]
